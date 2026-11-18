@@ -42,6 +42,8 @@
   .related span { display:block; padding:12px 14px; font-weight:500; }
   footer { border-top:1px solid var(--line); padding:26px 0 40px; font-size:13px; color:var(--espresso); }
   @media (max-width:820px) { .hero { grid-template-columns:1fr; } .expect { grid-template-columns:1fr; } }
+  /* Desktop scale: 80% of the full size. Phones keep 100% so text stays readable. */
+  @media (min-width: 900px) { html { zoom: 0.8; } }
 </style>
 </head>
 <body>

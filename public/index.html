@@ -446,6 +446,8 @@
     .svc-grid, .pe-widget .svc-grid { grid-template-columns: 1fr 1fr; }
     .chat-fab { right: 12px; bottom: 12px; }
   }
+  /* Desktop scale: 80% of the full size. Phones keep 100% so text stays readable. */
+  @media (min-width: 900px) { html { zoom: 0.8; } }
 </style>
 </head>
 <body>
