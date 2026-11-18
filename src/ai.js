@@ -231,14 +231,16 @@ async function respond(db, { history, conversationId, channel = 'website' }) {
 
   if (!process.env.GEMINI_API_KEY) return fallbackReply(db, text);
 
-  const model = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
+  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
   const contents = toApiMessages(history);
   if (contents.length === 0) return { text: 'Hi, I\'m here 24/7. How can I help you today? I can answer questions, suggest a treatment, or book a consultation.', needsHuman: false };
 
   try {
+    // Build the prompt once per reply, not once per tool round (each build runs several database queries)
+    const systemText = await buildSystemPrompt(db);
     for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
       const resp = await callGemini(model, {
-        systemInstruction: { parts: [{ text: await buildSystemPrompt(db) }] },
+        systemInstruction: { parts: [{ text: systemText }] },
         tools: [{ functionDeclarations: FUNCTION_DECLARATIONS }],
         generationConfig: { maxOutputTokens: 1024 },
         contents,
