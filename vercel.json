@@ -3,6 +3,6 @@
     "api/index.js": { "includeFiles": "public/**" }
   },
   "rewrites": [
-    { "source": "/((?!_vercel).*)", "destination": "/api/index" }
+    { "source": "/((?!_vercel).*)", "destination": "/api/index?p=$1" }
   ]
 }
