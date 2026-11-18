@@ -970,9 +970,18 @@
   setInterval(poll, 5000);
 
   let busy = false;
+  // When Vi offers to check times and the guest says yes, open the booking form with the calendar instead of chatting
+  const AFFIRM = /^(yes|yeah|yep|yup|sure|ok|okay|please|yes please|sounds good|absolutely|definitely)/i;
+  const OFFERS_TIMES = /(available times|check.*times|open times|book.*consultation|consultation.*time)/i;
   async function send(raw) {
     const text = String(raw || '').trim();
     if (!text || busy) return;
+    const lastVi = [...state.log].reverse().find((m) => m.role === 'vi');
+    if (AFFIRM.test(text) && lastVi && OFFERS_TIMES.test(lastVi.text)) {
+      addMsg('you', text);
+      showBookingForm('Consultation');
+      return;
+    }
     busy = true;
     addMsg('you', text);
     showTyping(true);
