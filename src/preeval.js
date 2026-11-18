@@ -18,7 +18,7 @@ async function submit(db, body) {
   const phone = booking.normalizePhone(body.phone);
   if (!phone) throw new booking.BookingError('Please enter a valid 10-digit US mobile number.');
   const email = cleanEmail(body.email);
-  if (String(body.email || '').trim() && !email) throw new booking.BookingError('Please enter a valid email address, or leave it blank.');
+  if (!email) throw new booking.BookingError('Please enter a valid email address.');
 
   // Keep only short string answers, with a cap on how many
   const answers = [];

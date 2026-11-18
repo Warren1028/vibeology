@@ -375,6 +375,19 @@ function createServer({ db, adminPassword }) {
     return { ok: true };
   }, { auth: true });
 
+  // ---- Pre-consult leads (from the homepage pre-evaluation) ----
+  route('GET', '/api/admin/preconsult', async (req, params, query) => {
+    const rows = await db.all(
+      `SELECT p.id, p.service, p.answers, p.created_at,
+              c.id AS client_id, c.full_name, c.phone, c.email,
+              (SELECT cv.id FROM conversations cv WHERE cv.client_id = p.client_id AND cv.channel = 'preeval'
+               ORDER BY cv.id DESC LIMIT 1) AS conversation_id
+       FROM preevaluations p JOIN clients c ON c.id = p.client_id
+       ORDER BY p.id DESC LIMIT 200`
+    );
+    return { leads: rows.map((r) => ({ ...r, answers: JSON.parse(r.answers || '[]') })) };
+  }, { auth: true });
+
   // ---- Treatment menu (admin): booking length, price text, and on/off. Changes apply to new bookings. ----
   route('GET', '/api/admin/services', async () => ({
     services: await db.all('SELECT id, name, category, duration_min, price, active FROM services ORDER BY category, name'),

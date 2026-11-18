@@ -1226,7 +1226,7 @@
       body.innerHTML = `<div class="pe-fields">
         <label>Full name<input id="peName" autocomplete="name" maxlength="80" value="${esc(pe.picks.name || '')}"></label>
         <label>Mobile number<input id="peTel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(214) 555-0123" value="${esc(pe.picks.phone || '')}"></label>
-        <label>Email (optional)<input id="peMail" type="email" autocomplete="email" maxlength="120" value="${esc(pe.picks.email || '')}"></label>
+        <label>Email <span class="req">*</span><input id="peMail" required type="email" autocomplete="email" maxlength="120" value="${esc(pe.picks.email || '')}"></label>
         <label class="pe-consent"><input type="checkbox" id="peConsent" ${pe.picks.consent ? 'checked' : ''}> I agree to receive offers and appointment messages from VIBEology Medspa. Message and data rates may apply. Reply STOP to opt out.</label>
       </div>`;
     }
@@ -1252,6 +1252,7 @@
     if (pe.step === 0 && !pe.service) return err('Please choose a treatment to continue.');
     if (pe.step === 1 && !pe.picks.focus) return err('Please choose one option to continue.');
     if (pe.step === 2 && PE_HISTORY.some((_, i) => !pe.picks['h' + i])) return err('Please answer each question.');
+    if (pe.step === 3 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(($('peMail').value || '').trim())) return err('Please enter a valid email address.');
     if (pe.step < 3) { pe.step += 1; peRender(); return; }
     const answers = [
       { question: `Treatment of interest:`, answer: pe.service },
