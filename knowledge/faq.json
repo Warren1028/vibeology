@@ -1,0 +1,47 @@
+[
+  {
+    "q": "How much does treatment cost?",
+    "keywords": ["price", "cost", "how much", "pricing", "rate", "fee", "magkano", "cuanto", "precio"],
+    "a": "Pricing depends on the treatment and the amount needed, so our provider confirms it at your consultation. Ask me about any treatment you're considering, or book a consultation to get a clear plan."
+  },
+  {
+    "q": "What is a consultation?",
+    "keywords": ["consult", "consultation", "first visit", "new client", "first time", "new patient", "evaluate"],
+    "a": "A consultation is a 30-minute visit with one of our providers. We talk through your goals, review your health history, explain your options, and recommend what makes sense, with no pressure to book a treatment."
+  },
+  {
+    "q": "Do I need an appointment?",
+    "keywords": ["appointment", "walk-in", "walk in", "without booking", "no booking", "drop in"],
+    "a": "We recommend booking so your provider has time for you. I can book a time right here in the chat, any time of day."
+  },
+  {
+    "q": "Can I change or cancel my appointment?",
+    "keywords": ["cancel", "reschedule", "change my appointment", "move my appointment", "change appointment", "change my booking"],
+    "a": "Yes. Let us know here in the chat or call (972) 533-6293 as early as you can, so another guest can take the time."
+  },
+  {
+    "q": "Where are you located?",
+    "keywords": ["where", "location", "address", "located", "directions", "parking", "saan", "donde", "direccion"],
+    "a": "We are at 4580 West University Drive #132, Prosper, TX 75078. We welcome guests from Prosper, Frisco, McKinney, Celina, Aubrey, and Savannah."
+  },
+  {
+    "q": "Who are the providers?",
+    "keywords": ["provider", "doctor", "nurse", "practitioner", "who", "medical director", "sharon", "lindsay", "fnp", "physician"],
+    "a": "Sharon Suh, FNP-C, is our founder and nurse practitioner. Dr. Rodney Lindsay is our medical director, a board-certified family medicine physician."
+  },
+  {
+    "q": "Is hormone replacement therapy (HRT) available?",
+    "keywords": ["hrt", "hormone", "testosterone", "estrogen", "menopause", "bioidentical"],
+    "a": "Yes. Hormone replacement therapy is medically supervised. A licensed provider reviews your history and any labs at your consultation before anything is prescribed, so I can't say whether it's right for you here."
+  },
+  {
+    "q": "What should I do after a treatment?",
+    "keywords": ["after treatment", "aftercare", "after my", "care instructions", "after care", "after the procedure", "after botox", "after filler"],
+    "a": "Your provider will give you aftercare instructions for your specific treatment. If you notice severe pain, swelling, vision changes, an allergic reaction, or trouble breathing, call 911 or go to the nearest emergency room, and call the clinic right away."
+  },
+  {
+    "q": "Do you offer memberships or payment plans?",
+    "keywords": ["membership", "payment plan", "financing", "pay over time", "plan", "installment"],
+    "a": "We offer memberships and payment plans. Ask me about them, and our team can walk you through the options at your consultation."
+  }
+]

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a Consultation | VIBEology Medspa</title>
+<meta name="description" content="Book a consultation at VIBEology Medspa in Prosper, TX. Choose a treatment, a day, and a time.">
+<link rel="icon" href="/brand/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --error: #8a3b2e;
+    --ivory: #F6F2ED; --warm-nude: #E9DFD5; --sand: #D2C6B7; --champagne: #D0AD74;
+    --spa-blue: #A8BEC1; --editorial-black: #0B0A09; --espresso: #504942; --card: #FBF9F6; --line: rgba(80, 73, 66, .16);
+    --serif: "Cormorant Garamond", Georgia, serif; --sans: "DM Sans", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ivory); color: var(--editorial-black); font-family: var(--sans); line-height: 1.5; }
+  .wrap { max-width: 1500px; margin: 0 auto; padding: 0 16px; }
+  header { border-bottom: 1px solid var(--line); background: rgba(246, 242, 237, .96); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  header img { height: 46px; }
+  header a { color: var(--espresso); text-decoration: none; font-size: 15px; }
+  main { padding: 40px 0 64px; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(38px, 6vw, 60px); line-height: 1.05; margin: 0 0 10px; }
+  .lead { color: var(--espresso); font-size: 17px; max-width: 620px; margin: 0 0 28px; }
+  .grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; align-items: start; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 26px; }
+  .card h2 { font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 0 0 14px; }
+  label { display: grid; gap: 6px; font-size: 13px; color: var(--espresso); margin-bottom: 14px; }
+  input, select { font: 16px var(--sans); padding: 12px 14px; border: 1px solid var(--sand); border-radius: 12px; background: var(--ivory); color: var(--editorial-black); width: 100%; }
+  .slots { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .slots button { font: 500 14px var(--sans); border: 1px solid var(--espresso); background: transparent; border-radius: 999px; padding: 8px 14px; cursor: pointer; color: var(--editorial-black); }
+  .slots button[aria-pressed="true"] { background: var(--editorial-black); color: var(--ivory); border-color: var(--editorial-black); }
+  .muted { color: var(--espresso); font-size: 14px; }
+  .consent { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; }
+  .consent input { width: auto; margin-top: 3px; }
+  .btn { width: 100%; border: 0; border-radius: 999px; padding: 15px; background: var(--editorial-black); color: var(--ivory); font: 600 16px var(--sans); cursor: pointer; }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+  .err { color: var(--error); font-size: 14px; min-height: 20px; margin-top: 10px; }
+  .ok { text-align: center; padding: 10px 0; }
+  .ok h2 { font-family: var(--serif); font-size: 34px; font-weight: 500; }
+  .side p { margin: 0 0 12px; }
+  .side .box { background: var(--editorial-black); color: var(--ivory); border-radius: 20px; padding: 24px; margin-top: 18px; }
+  .side .box a { color: var(--champagne); }
+
+  /* Date picker modal */
+  .date-modal { width: min(440px, 96vw); padding: 22px 22px 18px; }
+  .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .cal-head h4 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: 26px; }
+  .cal-nav { border: 1px solid var(--line); background: var(--card); width: 38px; height: 38px; border-radius: 50%; font-size: 18px; cursor: pointer; color: var(--editorial-black); }
+  .cal-nav:disabled { opacity: .35; cursor: not-allowed; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .cal-dow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--espresso); text-align: center; padding: 4px 0; }
+  .day { aspect-ratio: 1 / 1; border: 1px solid transparent; border-radius: 50%; background: transparent; font: 500 15px var(--sans); color: var(--editorial-black); cursor: pointer; }
+  .day:hover:not(:disabled) { border-color: var(--espresso); }
+  .day[aria-pressed="true"] { background: var(--editorial-black); color: var(--ivory); }
+  .day:disabled { color: var(--sand); cursor: not-allowed; text-decoration: line-through; }
+  .cal-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; font-size: 13px; color: var(--espresso); }
+  .cal-foot button { border: 0; background: none; color: var(--editorial-black); font: 600 14px var(--sans); cursor: pointer; text-decoration: underline; }
+
+  .btn-pick { width: 100%; display: flex; justify-content: space-between; align-items: center; font: 16px var(--sans); padding: 12px 14px; border: 1px solid var(--sand); border-radius: 12px; background: var(--ivory); color: var(--editorial-black); cursor: pointer; text-align: left; }
+  .modal-bg { position: fixed; inset: 0; background: rgba(11, 10, 9, .55); z-index: 90; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal-bg.open { display: flex; }
+  .modal { background: var(--ivory); border-radius: 22px; padding: 22px; }
+  .date-modal { width: min(440px, 96vw); }
+  .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .cal-head h4 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: 26px; }
+  .cal-nav { border: 1px solid var(--line); background: var(--card); width: 38px; height: 38px; border-radius: 50%; font-size: 18px; cursor: pointer; color: var(--editorial-black); }
+  .cal-nav:disabled { opacity: .35; cursor: not-allowed; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .cal-dow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--espresso); text-align: center; padding: 4px 0; }
+  .day { aspect-ratio: 1 / 1; border: 1px solid transparent; border-radius: 50%; background: transparent; font: 500 15px var(--sans); color: var(--editorial-black); cursor: pointer; }
+  .day:hover:not(:disabled) { border-color: var(--espresso); }
+  .day[aria-pressed="true"] { background: var(--editorial-black); color: var(--ivory); }
+  .day:disabled { color: var(--sand); cursor: not-allowed; text-decoration: line-through; }
+  .cal-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; font-size: 13px; color: var(--espresso); }
+  .cal-foot button { border: 0; background: none; color: var(--editorial-black); font: 600 14px var(--sans); cursor: pointer; text-decoration: underline; }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a href="/"><img src="/brand/logo.png" alt="VIBEology Medspa"></a>
+    <a href="/#peWidget">Pre-evaluation first</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <h1>Book a consultation</h1>
+    <p class="lead">Pick a treatment, a day, and a time. Your provider will go over your goals and options at your visit.</p>
+
+    <div class="grid">
+      <div class="card" id="formCard">
+        <h2>Your appointment</h2>
+        <label>Treatment
+          <select id="svc"><option value="">Loading treatments…</option></select>
+        </label>
+        <div style="margin-bottom:14px"><div style="font-size:13px;color:var(--espresso);margin-bottom:6px">Date</div><button type="button" class="btn-pick" id="dateBtn">Choose a date <span aria-hidden="true">›</span></button><input id="date" type="hidden"></div>
+        <div class="muted" style="margin-bottom:8px">Open times</div>
+        <div class="slots" id="slots"><span class="muted">Pick a date to see times.</span></div>
+        <label>Full name <span style="color:var(--error)">*</span><input id="name" autocomplete="name" maxlength="80" required></label>
+        <label>Mobile number <span style="color:var(--error)">*</span><input id="phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(214) 555-0123" required></label>
+        <label>Email <span style="color:var(--error)">*</span><input id="email" type="email" autocomplete="email" maxlength="120" required></label>
+        <label class="consent"><input type="checkbox" id="consent"> I agree to receive offers and appointment messages from VIBEology Medspa. Message and data rates may apply. Reply STOP to opt out.</label>
+        <button class="btn" id="submit" disabled>Confirm booking</button>
+        <div class="err" id="err" role="alert"></div>
+      </div>
+
+      <aside class="side">
+        <div class="card">
+          <h2>Not sure what to book?</h2>
+          <p class="muted">Start with a consultation. It is the best first step, and it is where your provider recommends a plan.</p>
+          <p class="muted">Prefer to chat first? <a href="/#peWidget">Complete the pre-evaluation</a>, or ask Vi any time, 24/7.</p>
+        </div>
+        <div class="box">
+          <p style="margin:0 0 6px;font-family:var(--serif);font-size:24px">VIBEology Medspa</p>
+          <p style="margin:0;opacity:.9">4580 West University Drive #132<br>Prosper, TX 75078</p>
+          <p style="margin:12px 0 0"><a href="tel:+19725336293">972 533 6293</a></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<div class="modal-bg" id="dateModal" aria-hidden="true">
+  <div class="modal date-modal" role="dialog" aria-modal="true" aria-labelledby="dateModalTitle">
+    <div class="cal-head">
+      <button class="cal-nav" type="button" id="calPrev" aria-label="Previous month">‹</button>
+      <h4 id="dateModalTitle"></h4>
+      <button class="cal-nav" type="button" id="calNext" aria-label="Next month">›</button>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-foot"><span>Closed days are greyed out.</span><button type="button" id="calClose">Cancel</button></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  // ---- Date picker modal (open days come from the clinic's settings) ----
+  const dp = { y: 0, m: 0, selected: null, openDays: [1, 2, 3, 4, 5, 6], onPick: null };
+  const todayLocal = () => new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  function renderDatePicker() {
+    const first = new Date(Date.UTC(dp.y, dp.m, 1));
+    const days = new Date(Date.UTC(dp.y, dp.m + 1, 0)).getUTCDate();
+    const min = todayLocal();
+    const now = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
+    $('dateModalTitle').textContent = first.toLocaleString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+    $('calPrev').disabled = dp.y === now.getUTCFullYear() && dp.m <= now.getUTCMonth();
+    let html = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => `<div class="cal-dow">${d}</div>`).join('');
+    for (let i = 0; i < first.getUTCDay(); i++) html += '<span></span>';
+    for (let d = 1; d <= days; d++) {
+      const ds = `${dp.y}-${String(dp.m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const dow = new Date(Date.UTC(dp.y, dp.m, d)).getUTCDay();
+      const off = ds < min || !dp.openDays.includes(dow);
+      html += `<button type="button" class="day" data-date="${ds}" ${off ? 'disabled' : ''} aria-pressed="${ds === dp.selected}">${d}</button>`;
+    }
+    $('calGrid').innerHTML = html;
+  }
+  function openDatePicker(selected, onPick) {
+    const base = selected ? new Date(`${selected}T00:00:00Z`) : new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
+    dp.y = base.getUTCFullYear(); dp.m = base.getUTCMonth(); dp.selected = selected || null; dp.onPick = onPick;
+    renderDatePicker();
+    $('dateModal').classList.add('open'); $('dateModal').setAttribute('aria-hidden', 'false');
+  }
+  function closeDatePicker() { $('dateModal').classList.remove('open'); $('dateModal').setAttribute('aria-hidden', 'true'); }
+  $('calPrev').addEventListener('click', () => { dp.m -= 1; if (dp.m < 0) { dp.m = 11; dp.y -= 1; } renderDatePicker(); });
+  $('calNext').addEventListener('click', () => { dp.m += 1; if (dp.m > 11) { dp.m = 0; dp.y += 1; } renderDatePicker(); });
+  $('calClose').addEventListener('click', closeDatePicker);
+  $('dateModal').addEventListener('click', (e) => { if (e.target.id === 'dateModal') closeDatePicker(); });
+  $('calGrid').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-date]'); if (!b || b.disabled) return;
+    const ds = b.dataset.date; closeDatePicker();
+    if (dp.onPick) dp.onPick(ds);
+  });
+  $('dateBtn').addEventListener('click', () => openDatePicker($('date').value, (ds) => {
+    $('date').value = ds;
+    $('dateBtn').firstChild.textContent = new Date(ds + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' ';
+    $('date').dispatchEvent(new Event('change'));
+  }));
+  let time = null;
+
+  async function api(url, body) {
+    const res = await fetch(url, body ? { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) } : undefined);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || 'Something went wrong. Please call 972 533 6293.');
+    return data;
+  }
+  const hhmm = (t) => { const [h, m] = t.split(':').map(Number); return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
+
+
+  api('/api/public/info').then((info) => {
+    $('svc').innerHTML = '<option value="">Choose a treatment</option>' + info.services.map((s) =>
+      `<option value="${s.name.replace(/"/g, '&quot;')}">${s.name} (${s.duration_min} min)</option>`).join('');
+    if (info.clinic && info.clinic.openDays) dp.openDays = info.clinic.openDays;
+    const pre = new URLSearchParams(location.search).get('service');
+    if (pre) $('svc').value = pre;
+  }).catch(() => { $('svc').innerHTML = '<option value="">Treatments unavailable. Please call 972 533 6293.</option>'; });
+
+  async function loadSlots() {
+    time = null; $('submit').disabled = true;
+    const date = $('date').value, service = $('svc').value;
+    if (!date || !service) { $('slots').innerHTML = '<span class="muted">Choose a treatment and a date to see times.</span>'; return; }
+    $('slots').innerHTML = '<span class="muted">Checking times…</span>';
+    try {
+      const { slots } = await api(`/api/public/availability?date=${encodeURIComponent(date)}&service=${encodeURIComponent(service)}`);
+      $('slots').innerHTML = slots.length
+        ? slots.slice(0, 24).map((s) => `<button type="button" data-time="${s.time}" aria-pressed="false">${hhmm(s.time)}</button>`).join('')
+        : '<span class="muted">No open times that day. Try another date.</span>';
+    } catch (e) { $('slots').innerHTML = `<span class="muted">${e.message}</span>`; }
+  }
+  $('svc').addEventListener('change', loadSlots);
+  $('date').addEventListener('change', loadSlots);
+  $('slots').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-time]'); if (!b) return;
+    time = b.dataset.time;
+    document.querySelectorAll('#slots button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $('submit').disabled = false;
+  });
+
+  $('submit').addEventListener('click', async () => {
+    $('err').textContent = '';
+    if (!$('name').value.trim()) return ($('err').textContent = 'Please enter your full name.');
+    if ($('phone').value.replace(/\D/g, '').length < 10) return ($('err').textContent = 'Please enter a 10-digit mobile number.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('email').value.trim())) return ($('err').textContent = 'Please enter a valid email address.');
+    $('submit').disabled = true;
+    try {
+      const r = await api('/api/public/book', {
+        date: $('date').value, time, service: $('svc').value, name: $('name').value,
+        phone: $('phone').value, email: $('email').value, marketingConsent: $('consent').checked,
+      });
+      const a = r.appointment;
+      $('formCard').innerHTML = `<div class="ok"><h2>You're booked.</h2>
+        <p class="muted">${a.service} with ${a.provider}<br>${a.startsAt.slice(0, 10)} at ${hhmm(a.startsAt.slice(11))}</p>
+        <p class="muted">We will send a reminder before your visit. Need to change it? Call 972 533 6293 or chat with Vi.</p>
+        <p><a href="/">Back to the homepage</a></p></div>`;
+    } catch (e) {
+      $('err').textContent = e.message;
+      $('submit').disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>

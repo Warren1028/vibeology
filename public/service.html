@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treatment | VIBEology Medspa</title>
+<meta name="description" content="Treatment details at VIBEology Medspa in Prosper, TX. Book a consultation or chat with Vi, 24/7.">
+<link rel="icon" href="/brand/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --error: #8a3b2e; /* functional red for error text only */ --ivory:#F6F2ED; --warm-nude:#E9DFD5; --sand:#D2C6B7; --champagne:#D0AD74; --spa-blue:#A8BEC1; --editorial-black:#0B0A09; --espresso:#504942; --card:#FBF9F6; --line:rgba(80,73,66,.16); --serif:"Cormorant Garamond",Georgia,serif; --sans:"DM Sans",system-ui,sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ivory); color:var(--editorial-black); font-family:var(--sans); line-height:1.55; }
+  a { color:inherit; }
+  .wrap { max-width:1500px; margin:0 auto; padding:0 16px; }
+  header { border-bottom:1px solid var(--line); background:rgba(246,242,237,.96); position:sticky; top:0; z-index:5; }
+  header .wrap { display:flex; justify-content:space-between; align-items:center; height:70px; }
+  header img { height:44px; }
+  header a.back { text-decoration:none; color:var(--espresso); font-size:15px; }
+  .crumb { font-size:13px; color:var(--espresso); margin:28px 0 16px; }
+  .crumb a { text-decoration:none; }
+  .hero { display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; padding-bottom:56px; }
+  .hero img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:22px; display:block; background:var(--warm-nude); }
+  .eyebrow { font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--espresso); }
+  h1 { font-family:var(--serif); font-weight:500; font-size:clamp(40px,6vw,62px); line-height:1.05; margin:10px 0 16px; }
+  .summary { font-size:18px; color:var(--espresso); margin:0 0 24px; }
+  .price { font-size:14px; color:var(--espresso); margin:0 0 24px; }
+  .btns { display:flex; flex-wrap:wrap; gap:12px; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; padding:14px 26px; font:600 15px var(--sans); text-decoration:none; border:1px solid transparent; cursor:pointer; }
+  .btn-dark { background:var(--editorial-black); color:var(--ivory); }
+  .btn-light { border-color:var(--espresso); color:var(--editorial-black); background:transparent; }
+  section.block { padding:40px 0; border-top:1px solid var(--line); }
+  section.block h2 { font-family:var(--serif); font-weight:500; font-size:34px; margin:0 0 16px; }
+  .expect { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .expect li { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 20px; font-size:16px; }
+  .notice { font-size:13px; color:var(--espresso); background:var(--warm-nude); border-radius:14px; padding:14px 16px; margin-top:18px; }
+  .related { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
+  .related a { text-decoration:none; background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; display:block; }
+  .related img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+  .related span { display:block; padding:12px 14px; font-weight:500; }
+  footer { border-top:1px solid var(--line); padding:26px 0 40px; font-size:13px; color:var(--espresso); }
+  @media (max-width:820px) { .hero { grid-template-columns:1fr; } .expect { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a href="/"><img src="/brand/logo.png" alt="VIBEology Medspa"></a>
+    <a class="back" href="/#treatments">All treatments</a>
+  </div>
+</header>
+
+<main class="wrap" id="page">
+  <p class="crumb">Loading treatment…</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    VIBEology Medspa · 4580 West University Drive #132, Prosper, TX 75078 · <a href="tel:+19725336293">972 533 6293</a> · <a href="https://www.instagram.com/vibeologymedspa/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/people/Beautiful-Vibe-Medspa/61580848262549/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.tiktok.com/@beautifulvibemedspa" target="_blank" rel="noopener">TikTok</a>
+    <p style="margin:12px 0 0">Individual results vary. Treatments are performed by licensed providers after a consultation. Information on this page is general and is not medical advice.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const slugOf = (name) => name.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  const slug = decodeURIComponent(location.pathname.replace(/^\/services\//, '').replace(/\/$/, ''));
+
+  fetch('/api/public/info').then((r) => r.json()).then((info) => {
+    const all = info.services || [];
+    const svc = all.find((s) => slugOf(s.name) === slug);
+    if (!svc) {
+      document.getElementById('page').innerHTML = '<p class="crumb">We could not find that treatment. <a href="/#treatments">See all treatments</a>.</p>';
+      return;
+    }
+    const d = (() => { try { return JSON.parse(svc.details || '{}'); } catch (e) { return {}; } })();
+    const related = all.filter((s) => s.category === svc.category && s.name !== svc.name).slice(0, 4);
+    document.title = `${svc.name} | VIBEology Medspa`;
+    document.getElementById('page').innerHTML = `
+      <p class="crumb"><a href="/">Home</a> · <a href="/#treatments">Treatments</a> · ${esc(svc.category)}</p>
+      <div class="hero">
+        <div>${svc.image ? `<img src="${esc(svc.image)}" alt="${esc(svc.name)}">` : ''}</div>
+        <div>
+          <span class="eyebrow">${esc(svc.category)}</span>
+          <h1>${esc(svc.name)}</h1>
+          <p class="summary">${esc(d.summary || svc.description)}</p>
+          <p class="price">${svc.price ? esc(svc.price) : 'Pricing is confirmed at your consultation.'} · about ${svc.duration_min} minutes</p>
+          <div class="btns">
+            <a class="btn btn-dark" href="/book-now?service=${encodeURIComponent(svc.name)}">Book this treatment</a>
+            <a class="btn btn-light" href="/#peWidget">Start pre-evaluation</a>
+          </div>
+        </div>
+      </div>
+      ${(d.expect && d.expect.length) ? `
+      <section class="block">
+        <h2>What to expect</h2>
+        <ul class="expect">${d.expect.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+        <p class="notice">Your provider decides whether this treatment is right for you at your consultation. Ask Vi any time, 24/7.</p>
+      </section>` : ''}
+      ${related.length ? `
+      <section class="block">
+        <h2>More in ${esc(svc.category)}</h2>
+        <div class="related">${related.map((r) => `<a href="/services/${slugOf(r.name)}">${r.image ? `<img src="${esc(r.image)}" alt="">` : ''}<span>${esc(r.name)}</span></a>`).join('')}</div>
+      </section>` : ''}`;
+  }).catch(() => {
+    document.getElementById('page').innerHTML = '<p class="crumb">This page could not load. Please call 972 533 6293.</p>';
+  });
+})();
+</script>
+</body>
+</html>
