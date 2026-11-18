@@ -972,7 +972,7 @@
   let busy = false;
   // When Vi offers to check times and the guest says yes, open the booking form with the calendar instead of chatting
   const AFFIRM = /^(yes|yeah|yep|yup|sure|ok|okay|please|yes please|sounds good|absolutely|definitely)/i;
-  const OFFERS_TIMES = /(available times|check.*times|open times|book.*consultation|consultation.*time)/i;
+  const OFFERS_TIMES = /(available times|check.*times|open times|openings|times (work|that work)|schedule.*(consultation|appointment)|book.*(consultation|appointment)|consultation.*times?)/i;
   async function send(raw) {
     const text = String(raw || '').trim();
     if (!text || busy) return;
