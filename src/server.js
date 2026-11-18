@@ -61,7 +61,10 @@ function createServer({ db, adminPassword }) {
       serviceName: query.get('service') || '',
       providerId: null,
     });
-    return { slots: slots.map((s) => ({ time: s.time, provider: s.providerName })) };
+    // One entry per start time. Several providers can share a time; the guest only needs the time.
+    const seen = new Set();
+    const unique = slots.filter((s) => (seen.has(s.time) ? false : seen.add(s.time)));
+    return { slots: unique.map((s) => ({ time: s.time })) };
   });
 
   route('POST', '/api/chat', async (req, params, query, body) => {

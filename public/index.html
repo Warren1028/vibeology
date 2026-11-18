@@ -448,6 +448,7 @@
   }
   /* Desktop scale: 80% of the full size. Phones keep 100% so text stays readable. */
   @media (min-width: 900px) { html { zoom: 0.8; } }
+  .lbl { display: inline; }
 </style>
 </head>
 <body>
@@ -1107,8 +1108,8 @@
       <div><div style="font-size:12px;color:var(--espresso);margin-bottom:6px">Date</div><button type="button" class="btn btn-light" id="bDateBtn" style="width:100%;justify-content:space-between;border-radius:12px">Choose a date <span aria-hidden="true">›</span></button><input id="bDate" type="hidden"></div>
       <div><div style="font-size:12px;color:var(--espresso);margin-bottom:6px">Open times</div><div class="slots" id="bSlots"><span style="font-size:13px;color:var(--espresso)">Pick a date to see times.</span></div></div>
       <label>Full name<input id="bName" autocomplete="name" maxlength="80" required></label>
-      <label>Mobile number <span class="req">*</span><input id="bPhone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(214) 555-0123" required></label>
-      <label>Email <span class="req">*</span><input id="bEmail" type="email" autocomplete="email" maxlength="120" required></label>
+      <label><span class="lbl">Mobile number <span class="req">*</span></span><input id="bPhone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(214) 555-0123" required></label>
+      <label><span class="lbl">Email <span class="req">*</span></span><input id="bEmail" type="email" autocomplete="email" maxlength="120" required></label>
       <label class="consent"><input type="checkbox" id="bConsent"> I agree to receive offers and appointment messages from VIBEology Medspa. Reply STOP to opt out.</label>
       <button class="btn btn-dark" type="button" id="bSubmit" disabled>Confirm booking</button>
       <div class="err" id="bErr"></div>`);

@@ -81,6 +81,7 @@
   @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
   /* Desktop scale: 80% of the full size. Phones keep 100% so text stays readable. */
   @media (min-width: 900px) { html { zoom: 0.8; } }
+  .lbl { display: inline; }
 </style>
 </head>
 <body>
@@ -105,9 +106,9 @@
         <div style="margin-bottom:14px"><div style="font-size:13px;color:var(--espresso);margin-bottom:6px">Date</div><button type="button" class="btn-pick" id="dateBtn">Choose a date <span aria-hidden="true">›</span></button><input id="date" type="hidden"></div>
         <div class="muted" style="margin-bottom:8px">Open times</div>
         <div class="slots" id="slots"><span class="muted">Pick a date to see times.</span></div>
-        <label>Full name <span style="color:var(--error)">*</span><input id="name" autocomplete="name" maxlength="80" required></label>
-        <label>Mobile number <span style="color:var(--error)">*</span><input id="phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(214) 555-0123" required></label>
-        <label>Email <span style="color:var(--error)">*</span><input id="email" type="email" autocomplete="email" maxlength="120" required></label>
+        <label><span class="lbl">Full name <span style="color:var(--error)">*</span></span><input id="name" autocomplete="name" maxlength="80" required></label>
+        <label><span class="lbl">Mobile number <span style="color:var(--error)">*</span></span><input id="phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(214) 555-0123" required></label>
+        <label><span class="lbl">Email <span style="color:var(--error)">*</span></span><input id="email" type="email" autocomplete="email" maxlength="120" required></label>
         <label class="consent"><input type="checkbox" id="consent"> I agree to receive offers and appointment messages from VIBEology Medspa. Message and data rates may apply. Reply STOP to opt out.</label>
         <button class="btn" id="submit" disabled>Confirm booking</button>
         <div class="err" id="err" role="alert"></div>
