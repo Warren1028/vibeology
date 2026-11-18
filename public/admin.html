@@ -731,7 +731,7 @@ th{color:var(--gold)}
               ${a.source !== 'staff' ? '<span class="chip c-green">Booked by AI</span>' : '<span class="chip c-teal">Staff</span>'}</div>`).join('')
             : '<div class="muted">No appointments today.</div>'}</div></div>
         <div class="card"><h3>AI activity (live)</h3>
-          <div class="list small">${d.aiActivity.length ? d.aiActivity.map((m) => `
+          <div class="list small" style="max-height:340px;overflow-y:auto;padding-right:6px">${d.aiActivity.length ? d.aiActivity.map((m) => `
             <div><span class="chip ${m.sender === 'ai' ? 'c-teal' : 'c-amber'}">${m.sender === 'ai' ? 'AI' : 'Staff'}</span>
               <div class="grow trunc">${esc(m.text)}</div><span class="muted">${new Date(m.created_at).toLocaleTimeString('en-PH', { hour: 'numeric', minute: '2-digit' })}</span></div>`).join('')
             : '<div class="muted">No AI replies yet. Try the chat on the website.</div>'}</div></div>
