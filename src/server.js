@@ -388,6 +388,13 @@ function createServer({ db, adminPassword }) {
     return { leads: rows.map((r) => ({ ...r, answers: JSON.parse(r.answers || '[]') })) };
   }, { auth: true });
 
+  // Deletes one pre-consult lead (its answers). The guest's client record, chats, and bookings stay.
+  route('DELETE', '/api/admin/preconsult/:id', async (req, params) => {
+    const r = await db.run('DELETE FROM preevaluations WHERE id = ?', [Number(params.id)]);
+    if (r.changes === 0) throw httpError(404, 'Lead not found');
+    return { ok: true };
+  }, { auth: true });
+
   // ---- Treatment menu (admin): booking length, price text, and on/off. Changes apply to new bookings. ----
   route('GET', '/api/admin/services', async () => ({
     services: await db.all('SELECT id, name, category, duration_min, price, active FROM services ORDER BY category, name'),

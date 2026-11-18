@@ -760,7 +760,7 @@ th{color:var(--gold)}
         <td><b>${esc(l.full_name)}</b><div class="small muted">${esc(l.phone || '')}</div><div class="small muted">${esc(l.email || '')}</div></td>
         <td>${esc(l.service)}</td>
         <td class="small">${l.answers.map((x) => `<div><span class="muted">${esc(x.question)}</span> ${esc(x.answer)}</div>`).join('')}</td>
-        <td>${l.conversation_id ? `<button class="btn sm" data-open-conv="${l.conversation_id}">Open chat</button>` : '<span class="small muted">No chat</span>'}</td>
+        <td><div style="display:flex;flex-direction:column;gap:6px">${l.conversation_id ? `<button class="btn sm" data-open-conv="${l.conversation_id}">Open chat</button>` : '<span class="small muted">No chat</span>'}<button class="btn sm" data-del-lead="${l.id}" style="color:var(--red)">Delete</button></div></td>
       </tr>`).join('');
     $('#v-preconsult').innerHTML = `
       <div class="banner">Guests who completed the homepage pre-evaluation. Email is required, so every lead can be followed up.</div>
@@ -768,6 +768,11 @@ th{color:var(--gold)}
         <table style="width:100%"><thead><tr><th>Submitted</th><th>Guest</th><th>Treatment</th><th>Answers</th><th></th></tr></thead>
         <tbody>${rows || '<tr><td colspan="5" class="muted">No pre-consult leads yet.</td></tr>'}</tbody></table>
       </div>`;
+    document.querySelectorAll('#v-preconsult [data-del-lead]').forEach((b) => b.onclick = async () => {
+      if (!confirm('Delete this pre-consult lead? Its answers are removed. The guest record and any chat or bookings are kept.')) return;
+      try { await api('DELETE', `/api/admin/preconsult/${b.dataset.delLead}`); renderPreconsult(); }
+      catch (e) { alert(e.message); }
+    });
     document.querySelectorAll('#v-preconsult [data-open-conv]').forEach((b) => b.onclick = () => {
       selectedConv = Number(b.dataset.openConv);
       go('inbox');
