@@ -991,7 +991,7 @@
       if (r.token) state.token = r.token;
       persist();
       await poll(); // the reply arrives through the same path as staff messages
-      if (r.askDetails) showDetailsForm();
+      // The details form is not shown on the first message. Booking collects the same details.
     } catch (e) {
       addMsg('sys', e.message);
     } finally {
