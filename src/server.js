@@ -184,7 +184,7 @@ function createServer({ db, adminPassword }) {
   route('GET', '/api/admin/meta', async () => ({
     aiEnabled: Boolean(process.env.GEMINI_API_KEY),
     settings: await getSettings(db),
-    services: await db.all('SELECT id, name, duration_min, price FROM services WHERE active = 1 ORDER BY name'),
+    services: await db.all('SELECT id, name, duration_min, price, category FROM services WHERE active = 1 ORDER BY name'),
     providers: await db.all('SELECT id, name FROM providers WHERE active = 1 ORDER BY name'),
   }), { auth: true });
 
@@ -466,6 +466,8 @@ function createServer({ db, adminPassword }) {
   }, { auth: true });
 
   route('POST', '/api/admin/appointments', async (req, params, query, body) => {
+    const mail = String(body.email || '').trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) throw httpError(400, 'Please enter a valid email address.');
     try {
       const result = await booking.bookAppointment(db, {
         date: body.date,
@@ -476,6 +478,7 @@ function createServer({ db, adminPassword }) {
         phone: body.phone,
         source: 'staff',
       });
+      await db.run('UPDATE clients SET email = ? WHERE id = ?', [mail, result.clientId]);
       return { booked: true, ...result };
     } catch (err) {
       if (err instanceof booking.BookingError) throw httpError(409, err.message);
