@@ -915,7 +915,7 @@ th{color:var(--gold)}
         const style = `top:${((start - openH * 60) / 60) * H + 2}px;height:${(dur / 60) * H - 4}px;` +
           (same.length > 1 ? `left:calc(${idx * w}% + 3px);right:auto;width:calc(${w}% - 6px)` : '');
         html += `<div class="appt ${cls}" data-id="${a.id}" style="${style}">
-          <b>${hm(a.starts_at)} ${esc(a.client_name)}</b>${esc(a.service_name)}${a.source !== 'staff' ? ' · AI' : ''}</div>`;
+          <b>${hm(a.starts_at)}–${hm(a.ends_at)} ${esc(a.client_name)}</b>${esc(a.service_name)}${a.source !== 'staff' ? ' · AI' : ''}</div>`;
       });
       html += '</div>';
     }
