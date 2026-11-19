@@ -85,7 +85,7 @@ async function seed(db) {
   const clients = [];
   for (let i = 0; i < 40; i++) {
     const last = LAST[(i * 7) % LAST.length];
-    const name = `${FIRST[i]} ${last}`;
+    const name = `${FIRST[i % FIRST.length]} ${last}`;
     const phone = `214555${String(1000 + i * 37).slice(-4)}`; // 214-555-xxxx, fictional range
     const email = R() < 0.85 ? `${FIRST[i % FIRST.length].toLowerCase()}.${last.toLowerCase().replace(/ /g, '')}${i}@demo.example` : null;
     const birthday = R() < 0.7
