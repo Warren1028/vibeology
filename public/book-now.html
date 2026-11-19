@@ -82,7 +82,23 @@
   /* Desktop scale: 80% of the full size. Phones keep 100% so text stays readable. */
   @media (min-width: 900px) { html { zoom: 0.8; } }
   .lbl { display: inline; }
+  /* Alternate palette (switch in the top bar). Colours only. */
+  html[data-theme="alt"] {
+    --ivory: #ffffff; --warm-nude: #fdf0f5; --sand: #f3cadb; --champagne: #f068a0;
+    --spa-blue: #f8c6dc; --editorial-black: #303030; --espresso: #585858; --card: #ffffff;
+    --line: rgba(48, 48, 48, .14); --btn: #f068a0; --btn-hover: #d9578c;
+  }
+  .theme-toggle { margin-left: 10px; border: 1px solid rgba(128, 128, 128, .5); background: transparent; color: inherit; border-radius: 999px; padding: 4px 12px; font: 600 12px var(--sans, sans-serif); cursor: pointer; white-space: nowrap; }
 </style>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search).get('theme');
+  var t = null;
+  try { t = localStorage.getItem('vibe_theme'); } catch (e) {}
+  if (q === 'alt' || q === 'brand') t = q;
+  if (t === 'alt') document.documentElement.setAttribute('data-theme', 'alt');
+})();
+</script>
 </head>
 <body>
 <header>
@@ -90,7 +106,7 @@
     <a href="/"><img src="/brand/logo.png" alt="VIBEology Medspa"></a>
     <a href="/#peWidget">Pre-evaluation first</a>
   </div>
-</header>
+<button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch colour palette">Compare: Alt colours</button></header>
 
 <main>
   <div class="wrap">
@@ -248,6 +264,21 @@
     }
   });
 })();
+</script>
+<script>
+  (function () {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    const label = () => { btn.textContent = root.getAttribute('data-theme') === 'alt' ? 'Compare: Brand colours' : 'Compare: Alt colours'; };
+    label();
+    btn.addEventListener('click', () => {
+      const alt = root.getAttribute('data-theme') !== 'alt';
+      if (alt) root.setAttribute('data-theme', 'alt'); else root.removeAttribute('data-theme');
+      try { localStorage.setItem('vibe_theme', alt ? 'alt' : 'brand'); } catch (e) {}
+      label();
+    });
+  })();
 </script>
 </body>
 </html>

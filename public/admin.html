@@ -224,6 +224,14 @@ th{color:var(--gold)}
 .svc-pick-row{display:block;width:100%;text-align:left;border:0;background:none;padding:6px 8px;border-radius:8px;font-size:13px;color:var(--text);cursor:pointer}
 .svc-pick-row:hover{background:var(--panel-2)}
 .svc-pick-row.on{background:var(--brand-soft);font-weight:600}
+  html[data-theme="alt"] {
+    --bg: #fdf6f9; --panel: #ffffff; --panel-2: #fdf0f5; --border: #f3cadb;
+    --text: #303030; --muted: #585858; --faint: #8a8a8a;
+    --brand: #f068a0; --brand-soft: #fde4ee; --brand-ink: #303030;
+    --gold: #f068a0; --gold-soft: #fde4ee; --gold-ink: #9c2f63;
+    --blue-soft: #fde9f2; --pink-soft: #fde4ee;
+  }
+  .theme-toggle { border: 1px solid var(--border); background: var(--panel); color: var(--text); border-radius: 999px; padding: 6px 12px; font: 600 12px 'DM Sans', sans-serif; cursor: pointer; white-space: nowrap; }
 </style>
 <style>
   /* Extras for the working app (not in the mockup) */
@@ -248,6 +256,15 @@ th{color:var(--gold)}
   .chat-empty { display: grid; place-items: center; height: 100%; color: var(--muted); padding: 24px; text-align: center; }
   .drawer .err { margin-top: 6px; }
 </style>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search).get('theme');
+  var t = null;
+  try { t = localStorage.getItem('vibe_theme'); } catch (e) {}
+  if (q === 'alt' || q === 'brand') t = q;
+  if (t === 'alt') document.documentElement.setAttribute('data-theme', 'alt');
+})();
+</script>
 </head>
 <body>
 
@@ -288,6 +305,7 @@ th{color:var(--gold)}
     <header class="top">
       <button class="menu-btn" id="menuBtn" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       <h1 id="title">Dashboard</h1>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch colour palette">Compare: Alt colours</button>
       <span class="ai-pill hide-sm" id="aiPill"><span class="dot"></span><span id="aiPillText">AI Assistant active</span></span>
       <div class="avatar" id="avatar">V</div>
     </header>
@@ -1263,6 +1281,21 @@ th{color:var(--gold)}
   // Boot
   api('GET', '/api/admin/me').then((r) => (r.authed ? showApp() : showLogin())).catch(showLogin);
 })();
+</script>
+<script>
+  (function () {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    const label = () => { btn.textContent = root.getAttribute('data-theme') === 'alt' ? 'Compare: Brand colours' : 'Compare: Alt colours'; };
+    label();
+    btn.addEventListener('click', () => {
+      const alt = root.getAttribute('data-theme') !== 'alt';
+      if (alt) root.setAttribute('data-theme', 'alt'); else root.removeAttribute('data-theme');
+      try { localStorage.setItem('vibe_theme', alt ? 'alt' : 'brand'); } catch (e) {}
+      label();
+    });
+  })();
 </script>
 </body>
 </html>
