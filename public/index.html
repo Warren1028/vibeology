@@ -6,6 +6,15 @@
 <title>VIBEology Medspa | Prosper, TX</title>
 <meta name="description" content="VIBEology Medspa in Prosper, TX. Natural aesthetics and elevated wellness, led by nurse practitioners and a medical director. Chat with Vi, our virtual front desk, 24/7, or book a consultation.">
 <link rel="icon" href="/brand/logo.png">
+<script>
+(function () {
+  var q = new URLSearchParams(location.search).get('theme');
+  var t = null;
+  try { t = localStorage.getItem('vibe_theme'); } catch (e) {}
+  if (q === 'alt' || q === 'brand') t = q;
+  if (t === 'alt') document.documentElement.setAttribute('data-theme', 'alt');
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,6 +52,22 @@
     --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     --radius: 20px;
   }
+  /* Alternate palette for comparison (switch in the top bar). Colours only; layout is identical. */
+  html[data-theme="alt"] {
+    --ivory: #ffffff;
+    --warm-nude: #fdf1f5;
+    --sand: #f2d3de;
+    --champagne: #ef6ea6;
+    --spa-blue: #f8c6d9;
+    --editorial-black: #2f2f2f;
+    --espresso: #5c5c5c;
+    --card: #ffffff;
+    --line: rgba(47, 47, 47, .14);
+    --btn: #ef6ea6;
+    --btn-hover: #d9558d;
+  }
+  .theme-toggle { margin-left: 14px; border: 1px solid rgba(233, 223, 213, .45); background: transparent; color: var(--warm-nude); border-radius: 999px; padding: 4px 12px; font: 600 12px var(--sans); cursor: pointer; }
+  .theme-toggle:hover { border-color: var(--champagne); color: var(--champagne); }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
@@ -78,8 +103,8 @@
     border: 1px solid transparent; cursor: pointer; transition: transform .15s, background .15s, color .15s;
   }
   .btn:hover { transform: translateY(-1px); }
-  .btn-dark { background: var(--editorial-black); color: var(--ivory); }
-  .btn-dark:hover { background: var(--espresso); }
+  .btn-dark { background: var(--btn, var(--editorial-black)); color: #ffffff; }
+  .btn-dark:hover { background: var(--btn-hover, var(--espresso)); }
   .btn-light { background: transparent; color: var(--editorial-black); border-color: var(--espresso); }
   .btn-light:hover { background: var(--warm-nude); }
   .btn-gold { background: var(--champagne); color: var(--editorial-black); }
@@ -456,6 +481,7 @@
 <div class="announce">
   Chat with Vi, our virtual front desk, any time of day.
   <button type="button" data-open-chat>Start a chat</button>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch colour palette">Compare: Alt colours</button>
   <span class="top-social">
     <a href="https://www.instagram.com/vibeologymedspa/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.facebook.com/people/Beautiful-Vibe-Medspa/61580848262549/" target="_blank" rel="noopener">Facebook</a>
@@ -1282,6 +1308,20 @@
     }
   });
   peRender();
+
+  // Palette switch: current brand palette or the alternate palette, remembered on this device
+  (function () {
+    const root = document.documentElement;
+    const btn = $('themeToggle');
+    const label = () => { btn.textContent = root.getAttribute('data-theme') === 'alt' ? 'Compare: Brand colours' : 'Compare: Alt colours'; };
+    label();
+    btn.addEventListener('click', () => {
+      const alt = root.getAttribute('data-theme') !== 'alt';
+      if (alt) root.setAttribute('data-theme', 'alt'); else root.removeAttribute('data-theme');
+      try { localStorage.setItem('vibe_theme', alt ? 'alt' : 'brand'); } catch (e) {}
+      label();
+    });
+  })();
 
   // Wire the open/close buttons
   $('fab').addEventListener('click', () => ($('chatPanel').classList.contains('open') ? closeChat() : openChat()));
