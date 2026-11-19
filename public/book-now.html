@@ -19,7 +19,7 @@
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--ivory); color: var(--editorial-black); font-family: var(--sans); line-height: 1.5; }
   .wrap { max-width: 1500px; margin: 0 auto; padding: 0 16px; }
-  header { border-bottom: 1px solid var(--line); background: rgba(246, 242, 237, .96); }
+  header { border-bottom: 1px solid var(--line); background: var(--header-bg, rgba(246, 242, 237, .96)); }
   header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   header img { height: 46px; }
   header a { color: var(--espresso); text-decoration: none; font-size: 15px; }
@@ -88,6 +88,7 @@
     --spa-blue: #f8c6dc; --editorial-black: #303030; --espresso: #585858; --card: #ffffff;
     --line: rgba(48, 48, 48, .14); --btn: #f068a0; --btn-hover: #d9578c;
   }
+  html[data-theme="alt"] { --header-bg: rgba(255, 255, 255, .95); }
   .theme-toggle { margin-left: 10px; border: 1px solid rgba(128, 128, 128, .5); background: transparent; color: inherit; border-radius: 999px; padding: 4px 12px; font: 600 12px var(--sans, sans-serif); cursor: pointer; white-space: nowrap; }
 </style>
 <script>
