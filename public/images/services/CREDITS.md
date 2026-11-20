@@ -14,3 +14,11 @@ Photos from Wikimedia Commons, used under the licenses listed. Each link opens t
 The other images in this folder (clinic-suite, clinic-lobby, front-desk, intake-desk, treatment-room, facial-treatment, body-treatment) are the client's own photos, from beautifulvibemedspa.com.
 
 CC BY and CC BY-SA images need attribution. Keep this file with the site, and show credits in the site footer before launch.
+
+## Section photos (public/images/sections)
+
+| File | Subject | License | Source |
+|---|---|---|---|
+| injectables.jpg | Botox injection being administered | Unsplash License (free to use) | https://unsplash.com/photos/botox-injection-being-administered-to-a-woman-qehqLHZ9toc (photo by Mina Rad) |
+| wellness.jpg | Woman resting on a bed | Pexels License (free to use) | https://www.pexels.com/photo/woman-covered-with-towel-lying-on-gray-bed-3921392/ (photo by Andrea Piacquadio) |
+| rejuvenation.jpg | Facial mask treatment | Pexels License (free to use) | https://www.pexels.com/photo/relaxing-spa-facial-treatment-with-face-mask-37229309/ (photo by DAVE GARCIA, who asks for credit when published) |
