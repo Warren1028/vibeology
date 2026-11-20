@@ -975,10 +975,35 @@
     renderFaq(b.dataset.faq);
   }));
 
+  const TREAT_IMG = {
+    "Bio-Stimulators": "/images/treatments/photo-34775441.jpg",
+    "Botox / Dysport / Letybo": "/images/treatments/photo-3985311.jpg",
+    "Cheek & Jawline Contouring": "/images/treatments/photo-3373716.jpg",
+    "Chemical Peels": "/images/treatments/photo-3985329.jpg",
+    "Consultation": "/images/treatments/photo-7659869.jpg",
+    "Dermal Fillers": "/images/treatments/photo-9157201.jpg",
+    "Hair Restoration": "/images/treatments/photo-27138340.jpg",
+    "Hormone Replacement Therapy": "/images/treatments/photo-4266939.jpg",
+    "IV Therapy": "/images/treatments/photo-3845126.jpg",
+    "Lip Filler": "/images/treatments/photo-34220532.jpg",
+    "Microneedling": "/images/treatments/photo-29648626.jpg",
+    "Non-Surgical BBL": "/images/treatments/photo-7772643.jpg",
+    "Peptide Therapy": "/images/treatments/photo-3952236.jpg",
+    "PRP / PRF Injections": "/images/treatments/photo-4047150.jpg",
+    "Radiesse": "/images/treatments/photo-34220525.jpg",
+    "RHA Redensity / Skinvive": "/images/treatments/photo-7581590.jpg",
+    "Sculptra": "/images/treatments/photo-34220525.jpg",
+    "Sexual Health": "/images/treatments/photo-4266939.jpg",
+    "Skin Boosters": "/images/treatments/photo-4093364.jpg",
+    "Skin Rejuvenation": "/images/treatments/photo-7446671.jpg",
+    "Tear Trough Filler": "/images/treatments/photo-3373716.jpg",
+    "Weight Loss Program": "/images/treatments/photo-31216063.jpg",
+  };
   async function loadSite() {
     try {
       const info = await api('/api/public/info');
       services = info.services || [];
+      services.forEach((s) => { if (TREAT_IMG[s.name]) s.image = TREAT_IMG[s.name]; });
       if (info.clinic && info.clinic.openDays) dp.openDays = info.clinic.openDays;
       renderCards('All');
       if (pe.step === 0) peRender();
