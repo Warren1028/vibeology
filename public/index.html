@@ -496,6 +496,12 @@
 @media (max-width: 980px) { .hero-photo { min-height: 420px; } }
 .hero-grid { align-items: stretch; }
 .hero-photo { min-height: 0; }
+.finder-preview { position: relative; padding: 0; overflow: hidden; display: block; background: #eee; }
+.finder-preview > img, .finder-blank { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.finder-blank { background: #e9e2e7; }
+.explore-wrap { position: absolute; left: 0; right: 0; bottom: 36px; z-index: 2; display: flex; justify-content: center; padding: 0 20px; }
+.explore-btn { background: linear-gradient(90deg,#f27bb1,#e8478f); color: #fff; border: 0; border-radius: 999px; padding: 16px 30px; font-size: 16px; font-weight: 600; text-decoration: none; box-shadow: 0 10px 24px rgba(232,71,143,.35); }
+.finder-preview { min-height: 420px; }
 </style>
 </head>
 <body>
@@ -906,15 +912,8 @@
     if (!s) { $('finderPreview').innerHTML = ''; return; }
     const d = parseDetails(s.details);
     $('finderPreview').innerHTML = `
-      ${s.image ? `<img src="${esc(s.image)}" alt="${esc(s.name)}">` : ''}
-      <span class="cat">${esc(s.category)}</span>
-      <h3>${esc(s.name)}</h3>
-      <p>${esc(d.summary || s.description)}</p>
-      <p class="price">${s.price ? esc(s.price) : 'Pricing is confirmed at your consultation.'} · about ${s.duration_min} minutes</p>
-      <div class="btns">
-        <a class="btn btn-light" href="/services/${slugOf(s.name)}">View treatment</a>
-        <a class="btn btn-dark" href="/book-now?service=${encodeURIComponent(s.name)}">Book this treatment</a>
-      </div>`;
+      ${s.image ? `<img src="${esc(s.image)}" alt="${esc(s.name)}">` : '<div class="finder-blank"></div>'}
+      <div class="explore-wrap"><a class="btn btn-pink explore-btn" href="/services/${slugOf(s.name)}">Explore ${esc(s.name)} <span aria-hidden="true">›</span></a></div>`;
   }
   function renderCards(cat) { renderFinder(cat); }
   $('finderList').addEventListener('click', (e) => {
