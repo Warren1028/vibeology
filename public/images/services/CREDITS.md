@@ -40,3 +40,7 @@ All from Pexels, free to use under the Pexels License. Photographer names are fr
 | photo-3952236.jpg | Peptide Therapy | cottonbro studio | https://www.pexels.com/photo/person-holding-a-vaccine-3952236/ |
 | photo-31216063.jpg | Weight Loss Program | Elif | https://www.pexels.com/photo/smiling-woman-in-loose-jeans-illustrates-weight-loss-31216063/ |
 | photo-7659869.jpg | Consultation | Thirdman | https://www.pexels.com/photo/doctor-consulting-a-patient-7659869/ |
+| photo-38924315.jpg | Sculptra | Pexels (free) | https://www.pexels.com/photo/close-up-of-hands-holding-sculptra-vial-38924315/ |
+| photo-36675196.jpg | Radiesse | Pexels (free) | https://www.pexels.com/photo/radiesse-duo-product-package-held-in-hand-36675196/ |
+| photo-7088834.jpg | Hormone Replacement Therapy | MART PRODUCTION (Pexels, free) | https://www.pexels.com/photo/hands-doctor-health-anonymous-7088834/ |
+| photo-7108319.jpg | Sexual Health | Pavel Danilyuk (Pexels, free) | https://www.pexels.com/photo/couple-at-medical-appointment-7108319/ |
