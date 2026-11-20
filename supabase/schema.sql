@@ -145,7 +145,7 @@ alter table sessions          enable row level security;
 -- Clinic hours and open days are placeholders until the clinic confirms them.
 insert into services (name, duration_min, price, recall_months, aftercare, description, category) values
   ('Consultation',                    30,  '', null, '', 'Meet a provider to talk through your goals, your options, and whether a treatment is right for you. The best first step.', 'Start here'),
-  ('Botox / Dysport / Letybo',        30,  '', 4,    '', 'Neurotoxin injections that soften expression lines. The provider chooses the product and amount at your visit.', 'Injectables'),
+  ('Botox / Dysport / Letybo',        30,  'Letybo $7 per unit', 4,    '', 'Neurotoxin injections that soften expression lines. The provider chooses the product and amount at your visit.', 'Injectables'),
   ('Skin Boosters',                   45,  '', null, '', 'Hydrating injections that improve skin quality and glow. The provider recommends the plan for your skin.', 'Injectables'),
   ('Bio-Stimulators',                 60,  '', null, '', 'Injectables that support natural collagen over time. Results build gradually. The provider explains what to expect.', 'Injectables'),
   ('Dermal Fillers',                  60,  '', null, '', 'Filler to restore volume or smooth lines. The provider explains the options and risks at your consultation.', 'Fillers & Contouring'),
