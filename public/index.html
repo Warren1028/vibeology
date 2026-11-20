@@ -502,6 +502,9 @@
 .explore-wrap { position: absolute; left: 0; right: 0; bottom: 36px; z-index: 2; display: flex; justify-content: center; padding: 0 20px; }
 .explore-btn { background: linear-gradient(90deg,#f27bb1,#e8478f); color: #fff; border: 0; border-radius: 999px; padding: 16px 30px; font-size: 16px; font-weight: 600; text-decoration: none; box-shadow: 0 10px 24px rgba(232,71,143,.35); }
 .finder-preview { min-height: 420px; }
+.pe-group { margin-bottom: 18px; }
+.pe-group-title { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--btn); margin: 6px 0 10px; }
+.explore-wrap { top: 50%; bottom: auto; transform: translateY(-50%); }
 </style>
 </head>
 <body>
@@ -1258,11 +1261,16 @@
     $('peNext').textContent = pe.step === 3 ? 'Submit pre-evaluation' : 'Continue';
     $('peErr').textContent = '';
     if (pe.step === 0) {
-      body.innerHTML = `<h3 class="pe-q" style="font-size:24px;margin-bottom:12px">Which treatment are you interested in?</h3>
-        <div class="chip-row">${services.length ? services.map((x) => `
+      const order = ["Start here", ...CATS];
+      const chip = (x) => `
           <button type="button" class="svc-chip" data-pick="service" data-val="${esc(x.name)}" aria-pressed="${pe.service === x.name}">
             ${x.image ? `<img src="${esc(x.image)}" alt="">` : '<span class="ph"></span>'}<span>${esc(x.name)}</span>
-          </button>`).join('') : '<p>Treatments are loading…</p>'}</div>`;
+          </button>`;
+      const groups = order.map((c) => ({ c, items: services.filter((x) => (x.category || "Start here") === c) })).filter((g) => g.items.length);
+      const other = services.filter((x) => !order.includes(x.category || "Start here"));
+      if (other.length) groups.push({ c: "More treatments", items: other });
+      body.innerHTML = `<h3 class="pe-q" style="font-size:24px;margin-bottom:12px">Which treatment are you interested in?</h3>
+        ${services.length ? groups.map((g) => `<div class="pe-group"><h4 class="pe-group-title">${esc(g.c)}</h4><div class="chip-row">${g.items.map(chip).join("")}</div></div>`).join("") : "<p>Treatments are loading…</p>"}`;
     } else if (pe.step === 1) {
       const cat = services.find((s) => s.name === pe.service)?.category || 'Start here';
       pe.cat = cat;
